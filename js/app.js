@@ -17,7 +17,7 @@
 					}
 				}
 				else { */
-					
+
 				$scope.titulo = data.data.Title;
 				$scope.ano = data.data.Year;
 				$scope.genero = data.data.Genre;
@@ -25,7 +25,7 @@
 				$scope.elenco = data.data.Actors;
 				$scope.sinopse = data.data.Plot;
 				$scope.nacionalidade = data.data.Country;
-				$scope.poster = data.data.Poster;				
+				$scope.poster = data.data.Poster;
 
 				//	$scope.objetoFilme = data.data;
 				/* } */
@@ -40,7 +40,7 @@
 			}
 			else 
 				{ $scope.posterFilme = "./image/no-picture.jpeg"; }
-		};		
+		};
 		carregarPoster();
-	});	
+	});
 })();
