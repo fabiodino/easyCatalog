@@ -3,44 +3,50 @@
 	var app = angular.module("easyCatalog", []);
 	app.controller("easyCatalogCtrl", function($scope, $http) {
 		
-		$scope.buscarFilmeImdb = function(nomeFilmeImdb) {
-			$http.get("https://www.omdbapi.com/?t=" + nomeFilmeImdb).then(successCallback, errorCallback);
+		$scope.imdbFilmes = [];
+
+		$scope.buscarImdbFilme = function(nomeImdbFilme) {
+			$http.get("https://www.omdbapi.com/?s=" + nomeImdbFilme).then(successCallback, errorCallback);
 			function successCallback(data, status) {
-				/* var err1 = data.data.Response;
-				var err2 = data.data.Error;
-				if(err1 = "False") {
-					if(err2 = "Movie not found!") {
+				var hasError = data.data.Response;
+				var errorMessage = data.data.Error;
+				if(hasError == "False") {
+					if(errorMessage == "Movie not found!") {
 						$scope.message = "Filme não encontrado!";
 					}
-					else if(err2 = "Something went wrong.") {
+					else if(errorMessage == "Something went wrong.") {
 						$scope.message = "Campo em branco!";
 					}
 				}
-				else { */
+				else {
 
-				$scope.titulo = data.data.Title;
-				$scope.ano = data.data.Year;
-				$scope.genero = data.data.Genre;
-				$scope.diretor = data.data.Director;
-				$scope.elenco = data.data.Actors;
-				$scope.sinopse = data.data.Plot;
-				$scope.nacionalidade = data.data.Country;
-				$scope.poster = data.data.Poster;
+					data.data.Search.forEach(function(filme) {
+						
+						var geraCapa = function(filme) {
+							if(filme.Poster !== "N/A") {
+								return poster = filme.Poster;
+							}
+							else { return poster ="./image/no-picture.jpeg"; };
+						};
+						
+						geraCapa(filme);
 
-				//	$scope.objetoFilme = data.data;
-				/* } */
+						$scope.imdbFilmes.push({
+
+							titulo: filme.Title,
+							ano: filme.Year,
+							tipo: filme.Type,
+							imdbId: filme.imdbID,
+							poster: poster
+						});
+						
+					});
+				}
 			};
 			function errorCallback(data, status) {
-				$scope.errMessage = "Aconteceu um problema: " + data.data;
-			};
-		};
-		var carregarPoster = function(poster) {
-			if(poster !== "N/A") {
-				$scope.posterFilme = poster; 
+				$scope.message = "Aconteceu um problema: " + data.data;
 			}
-			else 
-				{ $scope.posterFilme = "./image/no-picture.jpeg"; }
 		};
-		carregarPoster();
+		
 	});
 })();

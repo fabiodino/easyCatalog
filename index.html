@@ -6,7 +6,6 @@
 	<title>Biblioteca de filmes EasyCatalog</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="lib/angular/angular.js"></script>
-	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
 
@@ -16,39 +15,29 @@
 
 	<h2>Buscador IMDB</h2>
 
-	<input type="text" ng-model="nomeFilmeImdb" placeholder="Digite o nome do filme" />
-	<button ng-click="buscarFilmeImdb(nomeFilmeImdb)">Buscar</button>
-	<div>{{errMessage}}</div>
+	<input type="text" ng-model="nomeImdbFilme" placeholder="Digite o nome do filme" />
+	<button ng-click="buscarImdbFilme(nomeImdbFilme)">Buscar</button>
+	<div>{{message}}</div>
 	<hr/>
 	
 	<table>
 		<tr>
 			<th>Titulo</th>
 			<th>Ano</th>
-			<th>Gênero</th>
-			<th>Diretor</th>
-			<th>Elenco</th>
-			<th>Sinopse</th>
-			<th>Nacionalidade</th>
+			<th>Tipo</th>			
+			<th>IMDB id</th>
 			<th>Poster</th>
 		</tr>
-		<tr>
-			<td>{{titulo}}</td>
-			<td>{{ano}}</td>
-			<td>{{genero}}</td>
-			<td>{{diretor}}</td>
-			<td>{{elenco}}</td>
-			<td>{{sinopse}}</td>
-			<td>{{nacionalidade}}</td>
-			<td><img ng-src="{{posterFilme}}"></td>
+		<tr ng-repeat="imdbFilme in imdbFilmes">
+			<td>{{imdbFilme.titulo}}</td>
+			<td>{{imdbFilme.ano}}</td>
+			<td>{{imdbFilme.tipo}}</td>			
+			<td>{{imdbFilme.imdbId}}</td>
+			<td><img ng-src="{{imdbFilme.poster}}"></td>
 		</tr>
 	</table>
-
 	<hr/>
-	<p>{{objetoFilme}}</p>
-
-	{{posterFilme}}
-
+<div>{{imdbFilmes}}</div>
 </body>
 
 </html>
