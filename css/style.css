@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+}
+
+.header {    
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;    
+}
+
+#moldura {
+	box-shadow: 10px 10px 10px 5px black;
+}
+
+#legenda {
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+}
