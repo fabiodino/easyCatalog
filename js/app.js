@@ -51,6 +51,12 @@
 		$scope.adicionarFilme = function(imdbFilmes) {
 			$scope.imdbFilmes = imdbFilmes.filter(function(imdbFilme){
 				if (!imdbFilme.selecionado) return imdbFilme;
+			});
+		};
+		$scope.selecionaTodos = function(imdbFilmes) {
+			angular.forEach(imdbFilmes, function(imdbFilme) {
+				 $scope.todosSelecionado = imdbFilme.selecionado;
+				 console.log('kkkkkkkk' + $scope.todosSelecionado);			
 			});			
 		};
 	});
