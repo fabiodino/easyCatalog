@@ -22,8 +22,8 @@
 				else {
 					$scope.message = "";
 					$scope.imdbFilmes = [];
-					data.data.Search.forEach(function(filme) {
-						
+					/*data.data.Search.forEach(function(filme) {*/
+					angular.forEach($scope.imdbFilmes.data.data.Search, function() {
 						var poster = geraCapa(filme);
 
 						$scope.imdbFilmes.push({
@@ -53,11 +53,15 @@
 				if (!imdbFilme.selecionado) return imdbFilme;
 			});
 		};
-		$scope.selecionaTodos = function(imdbFilmes) {
-			angular.forEach(imdbFilmes, function(imdbFilme) {
-				 $scope.todosSelecionado = imdbFilme.selecionado;
-				 console.log('kkkkkkkk' + $scope.todosSelecionado);			
-			});			
-		};
+		$scope.checkAll = function() {
+			if($scope.selectedAll) {
+				$scope.selectedAll = true;
+			} else {
+				$scope.selectedAll = false;
+			}
+			angular.forEach($scope.imdbFilmes, function(imdbFilme) {
+				imdbFilme.selecionado = $scope.selectedAll;
+			});
+		}										
 	});
 })();
