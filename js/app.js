@@ -22,19 +22,17 @@
 				else {
 					$scope.message = "";
 					$scope.imdbFilmes = [];
-					/*data.data.Search.forEach(function(filme) {*/
-					angular.forEach($scope.imdbFilmes.data.data.Search, function() {
+					angular.forEach(data.data.Search, function(filme) {
+						
 						var poster = geraCapa(filme);
-
+						
 						$scope.imdbFilmes.push({
-
 							titulo: filme.Title,
 							ano: filme.Year,
 							tipo: filme.Type,
 							imdbId: filme.imdbID,
 							poster: poster
 						});
-						
 					});
 				}
 			};
@@ -62,6 +60,10 @@
 			angular.forEach($scope.imdbFilmes, function(imdbFilme) {
 				imdbFilme.selecionado = $scope.selectedAll;
 			});
-		}										
+		};
+		$scope.modal = function(selected) {
+			$scope.selected = selected;
+		};
+
 	});
 })();

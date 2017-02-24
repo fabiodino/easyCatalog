@@ -26,55 +26,67 @@
 			<div class="input-group">
 				<input type="text" class="form-control" ng-model="nomeImdbFilme" placeholder="Digite o nome do filme" />
 				<span class="input-group-btn">
-					<button type="button" class="btn btn-primary" ng-click="buscarImdbFilme()">Buscar</button>
+					<button type="button" class="btn btn-primary" ng-click="buscarImdbFilme(nomeImdbFilme)">Buscar</button>
 				</span>
 			</div>
 			<div class="alert-danger" role="alert">{{message}}</div>
 		</div>
 
 		<div>
+
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"></th>
-						<th>Selecionado</th>
 						<th>Titulo</th>
 						<th>Ano</th>
 						<th>Tipo</th>
-						<th>Poster</th>						
+						<th>Poster</th>
+						<th>View</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="imdbFilme in imdbFilmes">
 						<td><input type="checkbox" ng-model="imdbFilme.selecionado"></td>
-						<td>{{imdbFilme.selecionado}}</td>
 						<td>{{imdbFilme.titulo}}</td>
 						<td>{{imdbFilme.ano}}</td>
 						<td>{{imdbFilme.tipo}}</td>
-						<td><img ng-src="{{imdbFilme.poster}}" height="60" data-toggle="modal" data-target="#myModal" />
-							<div class="modal fade" id="myModal" role="dialog">
-		    					<div class="modal-dialog" ng-repeat="imdbFilme in imdbFilmes">      							
-		      						<div class="modal-content">       
-		        						<div class="modal-body" data-dismiss="modal">
-		        							<img ng-src="{{imdbFilme.poster}}" />
-		        						</div>        
-		      						</div>      
-		    					</div>
-		  					</div>		  					
-  						</td>  												
+						<td><img ng-src="{{imdbFilme.poster}}" height="60" /></td>
+						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#meuModal" ng-click="modal(imdbFilme)"><span class="glyphicon glyphicon-eye-open"></span></button></td>
 					</tr>
 				</tbody>
 			</table>
+			
+			<div class="modal fade" id="meuModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-body" data-dismiss="modal">
+							<div class="row">
+          						<div class="col-xs-12 col-md-8">
+          							<img src="{{selected.poster}}" class="img-responsive" />
+          						</div>
+          						<div class="col-xs-6 col-md-4">
+          							<p>{{selected.titulo}}</p>
+									<p>{{selected.ano}}</p>
+									<p>{{selected.tipo}}</p>
+								</div>
+        					</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<button class="btn btn-primary btn-block" ng-click="adicionarFilme(imdbFilmes)">Adicionar Filmes</button>
+
 		</div>
 
 	</div>
 
-	<div class="container">
+	<!-- <div class="container">
 		<h2 style="text-align: center;">Biblioteca de filmes</h2>
 	</div>
 
-	<div class="container" ng-style="{'background-image':'url(./image/fundo-madeira.jpeg)'}">
+	<div class="container">
 		<div class="row">
 			<div ng-repeat="imdbFilme in imdbFilmes">
 				<div class="col-lg-4">
@@ -85,6 +97,7 @@
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<div id="legenda">
+							<p><input type="checkbox" ng-model="imdbFilme.selecionado"></p>
 							<p>TÍTULO: {{imdbFilme.titulo}}</p>
 							<p>ANO: {{imdbFilme.ano}}</p>
 							<p>TIPO: {{imdbFilme.tipo}}</p>
@@ -93,7 +106,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 </body>
 </html>
