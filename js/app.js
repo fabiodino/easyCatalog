@@ -4,9 +4,10 @@
 	app.controller("easyCatalogCtrl", function($scope, $http) {
 		
 		$scope.imdbFilmes = [];
+		$scope.nomeImdbFilme = "";
 
-		$scope.buscarImdbFilme = function(nomeImdbFilme) {
-			$http.get("https://www.omdbapi.com/?s=" + nomeImdbFilme).then(successCallback, errorCallback);
+		$scope.buscarImdbFilme = function() {
+			$http.get("https://www.omdbapi.com/?s=" + this.nomeImdbFilme).then(successCallback, errorCallback);
 			function successCallback(data, status) {
 				var hasError = data.data.Response;
 				var errorMessage = data.data.Error;
@@ -61,9 +62,34 @@
 				imdbFilme.selecionado = $scope.selectedAll;
 			});
 		};
-		$scope.modal = function(selected) {
+		$scope.modalImdb = function(selected) {
 			$scope.selected = selected;
 		};
+
+		$scope.pressEnter = function(evento) {
+			if(evento.which === 13)
+				$scope.buscarImdbFilme();
+		};
+
+
+		$scope.movieSelected = function(id) {
+			sessionStorage.setItem('movieId', id);
+			window.location = 'movie.html';
+			return false;
+		}
+
+		$scope.getMovie = function(){
+			let movieId = sessionStorage.getItem('movieId');
+
+			$http.get("https://www.omdbapi.com/?i=" + this.movieId).then(successCallback, errorCallback);
+			function successCallback(data, status) {
+				console.log(response);
+			};
+			function errorCallback(data, status) {
+				$scope.message = "Aconteceu um problema: " + data.data;
+			}
+
+		}
 
 	});
 })();

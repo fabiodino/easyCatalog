@@ -1,35 +1,19 @@
-* {
-    box-sizing: border-box;
+table#t01 caption {
+	background-color: black;
+	color: white;
+	text-align: center;
 }
 
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
-}
+#movies img {
+	width:100%;	
+	}
 
-[class*="col-"] {
-    float: left;
-    padding: 15px;
-}
+@media(min-width: 960px) {
+	#movies .col-md-3 .well {
+		height:390px;
+	}
 
-/* For mobile phones: */
-[class*="col-"] {
-    width: 100%;
-}
-
-.header {    
-    color: #ffffff;
-    padding: 15px;
-    text-align: center;
-}
-
-#moldura {
-	box-shadow: 10px 10px 10px 5px black;
-}
-
-#legenda {
-	color: black;
-	font-weight: bold;
-	font-size: 1em;
+	#movies .col-md-3 img {
+		height:240px;
+	}
 }
