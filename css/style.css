@@ -1,3 +1,4 @@
+
 table#t01 caption {
 	background-color: black;
 	color: white;
@@ -5,15 +6,61 @@ table#t01 caption {
 }
 
 #movies img {
-	width:100%;	
-	}
+	width: 100%;
+}
 
-@media(min-width: 960px) {
-	#movies .col-md-3 .well {
-		height:390px;
-	}
+.shadow {
+	box-shadow: 0 1px 5px 1px #cccccc;
+}
 
-	#movies .col-md-3 img {
-		height:240px;
+
+/* Large Devices */
+@media(min-width: 1200px) {
+	#movies .well {
+		height:320px;
+	}
+	#movies img {
+		height:160px;
+	}	
+}
+
+/* Medium Devices Only */
+@media(min-width: 992px) and (max-width: 1199px) {
+	#movies .well {
+		height:360px;
+	}
+	#movies img {
+		height:230px;
 	}
 }
+
+/* Small Devices Only */
+@media(min-width: 768px) and (max-width: 991px) {
+	#movies .well {
+		height:390px;
+	}
+	#movies img {
+		height:260px;
+	}
+}
+
+/* Extra Small Devices Only */
+@media(max-width: 767px) {
+	#movies .well {
+		height:390px;
+	}
+	#movies img {
+		height:260px;
+	}
+}
+
+/* Super Extra Small Devices Only - e.g., iphone 4) */
+@media(max-width: 479px) {
+	#movies .well {
+		height:390px;
+	}
+	#movies img {
+		height:260px;
+	}
+}
+

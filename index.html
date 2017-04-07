@@ -33,24 +33,41 @@
 			</form>
 			<div class="alert-danger" role="alert">{{message}}</div>
 		</div>
-	</div>
-		
+	</div>		
 
 	<div class="container">
 		<div id="movies" class="row">
 			<div ng-repeat="imdbFilme in imdbFilmes">
-				<div class="col-md-3"> 
-					<div class="well text-center">
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 col-xs-12"> 
+					<div class="well text-center" ng-class="{'shadow':hover}" ng-mouseenter="hover=true" ng-mouseleave="hover=false">
 						<img ng-src="{{imdbFilme.poster}}"/>
 						<h5>{{imdbFilme.titulo}}</h5>
-						<a ng-click="movieSelected('{{imdbFilme.imdbId}}')" class="btn btn-primary" href="#">Movie Details</a>
-						<h5>{{imdbFilme.imdbId}}</h5>
+						<a class="btn btn-info" ng-click="buscarModalInfo(imdbFilme.imdbId)" data-toggle="modal" data-target="#movieModal">Filme Detalhes</a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
+		<div class="modal fade" id="movieModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body" data-dismiss="modal">
+						<div class="row">
+	  						<div class="col-xs-12 col-md-8">
+	  							<img src="{{modalMovieInfo.Poster}}" class="img-responsive" />
+	  						</div>
+	  						<div class="col-xs-6 col-md-4">
+	  							<p>{{modalMovieInfo.Plot}}</p>
+	  							<p>{{modalMovieInfo.Actors}}</p>
+							</div>
+							<div class="alert-danger" role="alert">{{messageModal}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 	
 	<div class="container">	
 		<div>

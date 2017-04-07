@@ -36,7 +36,7 @@
 						});
 					});
 				}
-			};
+			}
 			function errorCallback(data, status) {
 				$scope.message = "Aconteceu um problema: " + data.data;
 			}
@@ -45,7 +45,11 @@
 			if(filme.Poster !== "N/A") {
 				return filme.Poster;
 			}
-			else { return "./image/no-picture.jpeg"; };
+			else { return "./image/no-picture.jpeg"; }
+		};
+		$scope.pressEnter = function(evento) {
+			if(evento.which === 13)
+				$scope.buscarImdbFilme();
 		};
 		$scope.adicionarFilme = function(imdbFilmes) {
 			$scope.imdbFilmes = imdbFilmes.filter(function(imdbFilme){
@@ -65,31 +69,42 @@
 		$scope.modalImdb = function(selected) {
 			$scope.selected = selected;
 		};
-
-		$scope.pressEnter = function(evento) {
-			if(evento.which === 13)
-				$scope.buscarImdbFilme();
-		};
-
-
-		$scope.movieSelected = function(id) {
-			sessionStorage.setItem('movieId', id);
-			window.location = 'movie.html';
-			return false;
-		}
-
-		$scope.getMovie = function(){
-			let movieId = sessionStorage.getItem('movieId');
-
-			$http.get("https://www.omdbapi.com/?i=" + this.movieId).then(successCallback, errorCallback);
+		$scope.buscarModalInfo = function(id) {
+			$http.get("https://www.omdbapi.com/?i=" + id).then(successCallback, errorCallback);
 			function successCallback(data, status) {
-				console.log(response);
-			};
-			function errorCallback(data, status) {
-				$scope.message = "Aconteceu um problema: " + data.data;
+				
+				var hasErrorModal = data.data.Response;
+				var errorMessageModal = data.data.Error;
+				if(hasErrorModal == "False") {
+					$scope.modalMovieInfo = {};
+					if(errorMessageModal == "Movie not found!") {
+						$scope.messageModal = "Filme não encontrado!";
+					}
+					else if(errorMessageModal == "Something went wrong.") {
+						$scope.messageModal = "Campo em branco!";
+					}
+				}
+				else {
+					$scope.modalMovieInfo = {};
+					$scope.modalMovieInfo = data.data;
+				}
 			}
-
-		}
-
+			function errorCallback(data, status) {
+				$scope.messageModal = "Aconteceu um problema: " + data.data;
+			}
+		};
 	});
 })();
+
+/*
+Title
+Actors
+Country
+Plot
+Genre
+Poster
+Released
+Type
+Year
+imdbRating
+*/
